@@ -16,6 +16,7 @@ module RedisCopy
       debug:          false,
       allow_nonempty: false,
       pattern:        '*',
+      dest_is_nutcracker:  false,
     }.freeze unless defined?(DEFAULTS)
 
     def initialize(argv = ARGV)
@@ -98,6 +99,13 @@ module RedisCopy
 
         opts.on('--[no-]dry-run', 'Output configuration and exit') do |d|
           options[:dry_run] = true
+        end
+
+        opts.on('--[no-]dest-is-nutcracker', indent_desc.(
+          "Destination is nutcracker(twemproxy) (default #{DEFAULTS[:dest_is_nutcracker]}) \n" +
+          "will use dump-restore strategy.")
+          ) do |dest|
+          options[:dest_is_nutcracker] = dest
         end
 
         begin
