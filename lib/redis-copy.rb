@@ -26,7 +26,11 @@ module RedisCopy
       key_emitter = KeyEmitter.new(source, ui, options)
       strategem = Strategy.new(source, destination, ui, options)
 
-      dest_empty = !(destination.randomkey) # randomkey returns string unless db empty.
+      if options[:dest_is_nutcracker]
+        options[:allow_nonempty] = true
+      else
+        dest_empty = !(destination.randomkey) # randomkey returns string unless db empty.
+      end
 
       return false unless ui.confirm? <<-EODESC.strip_heredoc
         Source:      #{source.client.id}

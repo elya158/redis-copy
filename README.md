@@ -1,4 +1,4 @@
-# Redis::Copy
+# RedisCopy
 
 This utility provides a way to move the contents of one redis DB to another
 redis DB. It is inspired by the [redis-copy.rb script][original] included in
@@ -39,6 +39,8 @@ Specific options:
     -t, --[no-]trace                 Enable backtrace on failure (default false)
         --[no-]prompt                Prompt for confirmation (default true)
         --[no-]dry-run               Output configuration and exit
+        --[no-]dest-is-nutcracker    Destination is nutcracker(twemproxy) (default false)
+                                     will use dump-restore strategy
 ```
 
 ## Example:
